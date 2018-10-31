@@ -15,7 +15,7 @@ public class Student {
     private String class_st;
     private String birthday;
     
-    
+    public Student(){}
     public Student (String studentName, int studentID, String class_st, String birthday) {
     this.studentName = studentName;
     this.studentID = studentID;

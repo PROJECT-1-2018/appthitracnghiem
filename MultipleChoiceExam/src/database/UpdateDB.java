@@ -40,10 +40,10 @@ public class UpdateDB {
     }
     
     public void dbStudents(Student st){             // cap nhat thong tin sinh vien vào db
-        String sql ="INSERT INTO student VALUES(?,?,?,?)";
+        String sql ="INSERT INTO student(StudentID,StudentName,Class,Birthday) VALUES(?,?,?,?)";
         try ( Connection con = this.connect(); 
                 PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
+            p.setInt(1,st.getStudentID());              // not auto 
             p.setString(2,st.getStudentName());
             p.setString(3,st.getClass_st());
             p.setString(4,st.getBirthday());          
@@ -57,7 +57,7 @@ public class UpdateDB {
         String sql ="INSERT INTO subjects VALUES(?,?)";        
         try ( Connection con = this.connect(); 
                 PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
+            p.setInt(1,sub.getSubjectID());             // not auto 
             p.setString(2,sub.getSubjectName());             
             p.executeUpdate();
             
@@ -68,7 +68,7 @@ public class UpdateDB {
     public void dbTopic(Topic topic){               // cap nhat chu de
         String sql ="INSERT INTO topic VALUES(?,?,?)";
         try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
+            p.setInt(1,topic.getTopicID());
             p.setInt(2,topic.getSubjectID());
             p.setString(3,topic.getTopicName());            
             p.executeUpdate();
@@ -80,7 +80,7 @@ public class UpdateDB {
     public void dbQuestion(Questions que){          // cap nhat cau hoi 
         String sql ="INSERT INTO question VALUES(?,?,?,?)";
         try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
+            p.setInt(1,que.getQuestionID());
             p.setString(2,que.getQuestionContent());
             p.setInt(3,que.getTopicID());
             p.setInt(4,que.getQuestionLevel());          
@@ -93,7 +93,7 @@ public class UpdateDB {
     public void dbAnswer(Answer ans){   // cap nhat cau tra loi 
         String sql ="INSERT INTO answer VALUES(?,?,?,?)";
         try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
+            p.setInt(1,ans.getAnswerID());
             p.setString(2,ans.getAnswerContent());
             p.setInt(3,ans.getQuestionID());             
             p.setBoolean(4,ans.isIsTrue());
