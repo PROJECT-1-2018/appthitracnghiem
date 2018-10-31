@@ -22,7 +22,7 @@ public class CheckDB {
     public CheckDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/db_exam","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam","root","");
             st = con.createStatement();
         } catch (Exception exception){
             System.out.println(exception);
