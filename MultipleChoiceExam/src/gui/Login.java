@@ -6,6 +6,9 @@
 package Gui;
 
 import javax.swing.JOptionPane;
+import gui.MenuGV;
+import gui.MenuSt;
+import database.CheckDB;
 
 /**
  *
@@ -18,6 +21,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setBounds(50,50,400,400);
+        setResizable(false);
     }
 
     /**
@@ -58,12 +63,10 @@ public class Login extends javax.swing.JFrame {
         jMenu18 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        radioGV = new javax.swing.JRadioButton();
-        radioSV = new javax.swing.JRadioButton();
         labelMSSV = new javax.swing.JLabel();
         labelMatkhau = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tfMS = new javax.swing.JTextField();
+        tfMK = new javax.swing.JTextField();
         buttonDangNhap = new javax.swing.JButton();
         buttonThoat = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -71,21 +74,8 @@ public class Login extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jToolBar2 = new javax.swing.JToolBar();
         jLabel4 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu19 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu20 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu21 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu22 = new javax.swing.JMenu();
+        cbGV = new javax.swing.JCheckBox();
+        cbSV = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -154,24 +144,14 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập - Hệ thống thi trắc nghiệm");
-        setPreferredSize(new java.awt.Dimension(1000, 500));
 
-        radioGV.setText("Giáo viên đăng nhập");
-        radioGV.addActionListener(new java.awt.event.ActionListener() {
+        labelMSSV.setText("Tên đăng nhập :");
+
+        labelMatkhau.setText("Mật khẩu : ");
+
+        tfMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioGVActionPerformed(evt);
-            }
-        });
-
-        radioSV.setText("Sinh viên đăng nhập");
-
-        labelMSSV.setText("MSSV");
-
-        labelMatkhau.setText("Mật khẩu");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                tfMKActionPerformed(evt);
             }
         });
 
@@ -183,6 +163,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         buttonThoat.setText("Thoát");
+        buttonThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonThoatActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setText("Đăng nhập hệ thống");
@@ -193,102 +178,44 @@ public class Login extends javax.swing.JFrame {
 
         jLabel4.setText("jLabel4");
 
-        jMenu19.setText("Hệ thống");
-
-        jMenuItem7.setText("Đăng nhập");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        cbGV.setText("Giáo viên đăng nhập ");
+        cbGV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                cbGVActionPerformed(evt);
             }
         });
-        jMenu19.add(jMenuItem7);
 
-        jMenuItem3.setText("Sao lưu dữ liệu");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu19.add(jMenuItem3);
-
-        jMenuItem4.setText("Thoát");
-        jMenu19.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu19);
-
-        jMenu20.setText("Quản lý");
-
-        jMenuItem8.setText("Quản lý giáo viên");
-        jMenu20.add(jMenuItem8);
-
-        jMenuItem9.setText("Quản lý sinh viên");
-        jMenu20.add(jMenuItem9);
-
-        jMenuItem10.setText("Ngân hàng câu hỏi");
-        jMenu20.add(jMenuItem10);
-
-        jMenuItem14.setText("Thêm câu hỏi");
-        jMenu20.add(jMenuItem14);
-
-        jMenuItem11.setText("Xóa câu hỏi");
-        jMenu20.add(jMenuItem11);
-
-        jMenuBar1.add(jMenu20);
-
-        jMenu21.setText("Tra cứu");
-
-        jMenuItem12.setText("Tra cứu sinh viên");
-        jMenu21.add(jMenuItem12);
-
-        jMenuItem13.setText("Thống kê sinh viên");
-        jMenu21.add(jMenuItem13);
-
-        jMenuBar1.add(jMenu21);
-
-        jMenu22.setText("Hướng dẫn");
-        jMenuBar1.add(jMenu22);
-
-        setJMenuBar(jMenuBar1);
+        cbSV.setText("Sinh viên đăng nhập");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(355, 355, 355)
-                        .addComponent(radioGV)
-                        .addGap(35, 35, 35)
-                        .addComponent(radioSV))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(labelMatkhau)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(259, 259, 259)
-                                .addComponent(labelMSSV)
-                                .addGap(32, 32, 32)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(402, 402, 402)
-                        .addComponent(jLabel4)))
-                .addContainerGap(320, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(372, 372, 372))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbGV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbSV))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonThoat)
-                            .addComponent(buttonDangNhap))
-                        .addGap(415, 415, 415))))
+                            .addComponent(labelMatkhau)
+                            .addComponent(labelMSSV))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfMS, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfMK, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,53 +225,68 @@ public class Login extends javax.swing.JFrame {
                         .addGap(120, 120, 120)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(55, 55, 55)
                         .addComponent(jLabel3)
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbGV)
+                            .addComponent(cbSV))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioGV)
-                            .addComponent(radioSV))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelMSSV)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMatkhau))))
-                .addGap(18, 18, 18)
-                .addComponent(buttonDangNhap)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonThoat)
-                .addContainerGap(92, Short.MAX_VALUE))
+                            .addComponent(tfMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMatkhau))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonDangNhap)
+                            .addComponent(buttonThoat))))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void tfMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMKActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_tfMKActionPerformed
 
     private void buttonDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDangNhapActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công!");
+
+        CheckDB check = new CheckDB();
+        String username = tfMS.getText();
+        String password = tfMK.getText();
+        System.out.println(check.CheckTeacher(username,password));
+        if (cbGV.isSelected() && cbSV.isSelected() ) JOptionPane.showMessageDialog(rootPane, "Chỉ được chọn giáo viên hoặc sinh viên !");
+        else 
+        if (cbGV.isSelected()) {
+            if (check.CheckTeacher(username,password) ) {
+                setVisible(false);
+                MenuGV menu = new MenuGV();
+                menu.setVisible(true);
+            }else{
+                 JOptionPane.showMessageDialog(rootPane,"Mã số hoặc mật khẩu nhập sai, yêu cầu nhập lại !");    
+            }
+        }                        
+        else if (cbSV.isSelected()){
+            setVisible(false);
+            MenuSt menu = new MenuSt();
+            menu.setVisible(true);
+        }         
+           
     }//GEN-LAST:event_buttonDangNhapActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void cbGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_cbGVActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void radioGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioGVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioGVActionPerformed
+    private void buttonThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThoatActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_buttonThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,6 +326,8 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDangNhap;
     private javax.swing.JButton buttonThoat;
+    private javax.swing.JCheckBox cbGV;
+    private javax.swing.JCheckBox cbSV;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -396,10 +340,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu16;
     private javax.swing.JMenu jMenu17;
     private javax.swing.JMenu jMenu18;
-    private javax.swing.JMenu jMenu19;
-    private javax.swing.JMenu jMenu20;
-    private javax.swing.JMenu jMenu21;
-    private javax.swing.JMenu jMenu22;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -407,7 +347,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
@@ -416,28 +355,16 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar7;
     private javax.swing.JMenuBar jMenuBar8;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelMSSV;
     private javax.swing.JLabel labelMatkhau;
-    private javax.swing.JRadioButton radioGV;
-    private javax.swing.JRadioButton radioSV;
+    private javax.swing.JTextField tfMK;
+    private javax.swing.JTextField tfMS;
     // End of variables declaration//GEN-END:variables
 }

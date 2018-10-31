@@ -7,8 +7,11 @@ package database;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import object.Answer;
 import object.Questions;
 import object.Result;
@@ -22,11 +25,24 @@ import object.Topic;
  * @author DuongSon
  */
 public class UpdateDB {
-    private static Connection con = ConnectDB.getConnect();
+   
+    private Connection connect(){
+        Connection con= null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam","root","");         
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
+    }
     
     public void dbStudents(Student st){             // cap nhat thong tin sinh vien vào db
         String sql ="INSERT INTO student VALUES(?,?,?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        try ( Connection con = this.connect(); 
+                PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
             p.setString(2,st.getStudentName());
             p.setString(3,st.getClass_st());
@@ -38,10 +54,11 @@ public class UpdateDB {
         }
     }
     public void dbSubject(Subject sub){             // cap nhat mon hoc 
-        String sql ="INSERT INTO subjects VALUES(?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        String sql ="INSERT INTO subjects VALUES(?,?)";        
+        try ( Connection con = this.connect(); 
+                PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
-            p.setString(2,sub.getSubjectName());                    
+            p.setString(2,sub.getSubjectName());             
             p.executeUpdate();
             
         } catch (SQLException e) {
@@ -50,7 +67,7 @@ public class UpdateDB {
     }
     public void dbTopic(Topic topic){               // cap nhat chu de
         String sql ="INSERT INTO topic VALUES(?,?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
             p.setInt(2,topic.getSubjectID());
             p.setString(3,topic.getTopicName());            
@@ -62,7 +79,7 @@ public class UpdateDB {
     }
     public void dbQuestion(Questions que){          // cap nhat cau hoi 
         String sql ="INSERT INTO question VALUES(?,?,?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
             p.setString(2,que.getQuestionContent());
             p.setInt(3,que.getTopicID());
@@ -75,7 +92,7 @@ public class UpdateDB {
     }
     public void dbAnswer(Answer ans){   // cap nhat cau tra loi 
         String sql ="INSERT INTO answer VALUES(?,?,?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
             p.setString(2,ans.getAnswerContent());
             p.setInt(3,ans.getQuestionID());             
@@ -87,7 +104,7 @@ public class UpdateDB {
     }
     public void dbTest(Test test){                  // cap nhat de thi 
         String sql ="INSERT INTO test VALUES(?,?,?,?,?,?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
             p.setInt(2,test.getAmountQuestion());
             p.setInt(3,test.getTopicID());
@@ -102,7 +119,7 @@ public class UpdateDB {
     }
     public void dbResult(Result res){           // cap nhat ketqua
         String sql ="INSERT INTO result VALUES(?,?,?,?)";
-        try ( PreparedStatement p = con.prepareStatement(sql)){
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,0);
             p.setDate(2, (Date)res.getResultDate());
             p.setFloat(3,res.getPoints());
