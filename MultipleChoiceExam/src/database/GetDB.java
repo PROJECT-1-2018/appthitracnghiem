@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import object.Student;
 import object.Subject;
 
 /**
@@ -42,6 +43,21 @@ public class GetDB {
         } catch (Exception e) {
         }
         return listSubjects;
+    }
+    public ArrayList getListStudent(){ // lay du lieu cua subject cho vao mot danh sach arraylist
+        ArrayList<Student> listStudents = new ArrayList<Student>();
+        try {
+           String query = "select * from student";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 Student s = new Student(rs.getString("StudentName"),rs.getInt("StudentID"),
+                                         rs.getString("Birthday"),rs.getString("Class"));
+                 listStudents.add(s);
+                 
+            }
+        } catch (Exception e) {
+        }
+        return listStudents;
     }
     
     

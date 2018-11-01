@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/F:/GITHUP/appthitracnghiem-up/MultipleChoiceExam/src/database/CheckDB.java</file>
+            <file>file:/F:/GITHUP/appthitracnghiem-up/MultipleChoiceExam/src/gui/CreateRoom.java</file>
+        </group>
+>>>>>>> e98de8ae83d69d25ea3254cb120f5023af834ea3
     </open-files>
 </project-private>
