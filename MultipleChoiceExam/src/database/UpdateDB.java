@@ -30,7 +30,7 @@ public class UpdateDB {
         Connection con= null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hethongthitracnghiem","root","");         
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam","root","");         
         } catch (SQLException e){
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException ex) {

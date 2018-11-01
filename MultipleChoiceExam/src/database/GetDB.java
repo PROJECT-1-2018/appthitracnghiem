@@ -25,7 +25,7 @@ public class GetDB {
     public GetDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hethongthitracnghiem","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam","root","");
             st = con.createStatement();
         } catch (Exception exception){
             System.out.println(exception);
