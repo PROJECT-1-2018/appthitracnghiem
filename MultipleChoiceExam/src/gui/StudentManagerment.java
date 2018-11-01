@@ -259,8 +259,13 @@ public class StudentManagerment extends javax.swing.JFrame {
             up.dbStudents(s); 
             list.add(s);
             showResult();
+            JOptionPane.showMessageDialog(rootPane, "Thêm sinh viên thành công");
+            tfBD.setText("");
+            tfClass.setText("");
+            tfName.setText("");
          } else JOptionPane.showMessageDialog(rootPane,"Mã sinh viên đã tồn tại ");
          //
+            tfID.setText("");
     }//GEN-LAST:event_buttonThemActionPerformed
 
     private void buttonThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThoatActionPerformed
