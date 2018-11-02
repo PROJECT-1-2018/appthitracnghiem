@@ -51,7 +51,7 @@ public class GetDB {
             rs = st.executeQuery(query);
             while (rs.next()){                
                  Student s = new Student(rs.getString("StudentName"),rs.getInt("StudentID"),
-                                         rs.getString("Birthday"),rs.getString("Class"));
+                                         rs.getString("Class"),rs.getString("Birthday"));
                  listStudents.add(s);
                  
             }
