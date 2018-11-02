@@ -12,6 +12,7 @@ import object.Student;
 import database.GetDB;
 import database.UpdateDB;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -36,12 +37,12 @@ public class StudentManagerment extends javax.swing.JFrame {
         list = new GetDB().getListStudent();
         model =(DefaultTableModel) jTable2.getModel();
         model.setColumnIdentifiers(new Object[]{
-            "ID", "Name", "Birthday", "Class"
+            "ID", "Name", "Class", "Birthday"
         });
 
         for(Student s : list){
             model.addRow(new Object[]{
-                s.getStudentID(),s.getStudentName(),s.getBirthday(),s.getClass_st()
+                s.getStudentID(),s.getStudentName(),s.getClass_st(),s.getBirthday()
             });
         }
     }
@@ -118,7 +119,7 @@ public class StudentManagerment extends javax.swing.JFrame {
 
             },
             new String [] {
-                "MSSV", "Họ tên", "Ngày sinh", "Lớp"
+                "MSSV", "Họ tên", "Lớp", "Ngày sinh"
             }
         ) {
             Class[] types = new Class [] {
@@ -127,6 +128,11 @@ public class StudentManagerment extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -274,10 +280,26 @@ public class StudentManagerment extends javax.swing.JFrame {
         menu.setVisible(true);
         
     }//GEN-LAST:event_buttonThoatActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        int index = jTable2.getSelectedRow();
+        TableModel mdl = jTable2.getModel();
+        String ID = model.getValueAt(index, 0).toString();
+        String Name = model.getValueAt(index, 1).toString();
+        String Birth = model.getValueAt(index, 3).toString();
+        String Class = model.getValueAt(index, 2).toString();
+        tfID.setText(ID);
+        tfClass.setText(Class);
+        tfName.setText(Name);
+        tfBD.setText(Birth);
+        
+        
+    }//GEN-LAST:event_jTable2MouseClicked
     public void showResult(){
         Student s = list.get(list.size()-1);
         model.addRow(new Object[]{
-             s.getStudentID(), s.getStudentName(),s.getBirthday(),s.getClass_st()
+             s.getStudentID(), s.getStudentName(),s.getClass_st(),s.getBirthday()
         });
     }
     /**
