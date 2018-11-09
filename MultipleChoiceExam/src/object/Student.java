@@ -5,6 +5,8 @@
  */
 package object;
 
+import java.sql.Date;
+
 /**
  *
  * @author Nguyen Viet Tien
@@ -13,10 +15,10 @@ public class Student {
     private String studentName;
     private int studentID;
     private String class_st;
-    private String birthday;
+    private Date birthday;
     
     public Student(){}
-    public Student (String studentName, int studentID, String class_st, String birthday) {
+    public Student (String studentName, int studentID, String class_st, Date birthday) {
     this.studentName = studentName;
     this.studentID = studentID;
     this.class_st = class_st;
@@ -49,11 +51,11 @@ public class Student {
         this.class_st = class_st;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }

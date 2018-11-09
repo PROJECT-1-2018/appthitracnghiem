@@ -30,7 +30,7 @@ public class UpdateDB {
         Connection con= null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam","root","");         
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2","root","");         
         } catch (SQLException e){
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -46,7 +46,7 @@ public class UpdateDB {
             p.setInt(1,st.getStudentID());              // not auto 
             p.setString(2,st.getStudentName());
             p.setString(3,st.getClass_st());
-            p.setString(4,st.getBirthday());          
+            p.setDate(4,st.getBirthday());          
             p.executeUpdate();
             
         } catch (SQLException e) {

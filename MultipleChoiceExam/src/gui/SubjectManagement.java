@@ -9,6 +9,7 @@ package gui;
  * @author User
  */
 import database.CheckDB;
+import database.DeleteDB;
 import database.GetDB;
 import gui.MenuGV;
 import object.Subject;
@@ -21,6 +22,7 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 public class SubjectManagement extends javax.swing.JFrame {
     private ArrayList<Subject> listSubjects;
@@ -30,18 +32,13 @@ public class SubjectManagement extends javax.swing.JFrame {
         initComponents();
         setBounds(50,50,800,450);
         setResizable(false);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        addTable();        
-    }
-    private void addEventClickTable(){
-        int column = tbList.getSelectedColumn();
-        int row = tbList.getSelectedRow();
-        
-    }
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+        addTable();        // them bảng
+    }    
     private void addTable(){    // cai dat cho bang 
-        listSubjects = new GetDB().getListSubject();
+        listSubjects = new GetDB().getListSubject();    // lay du lieu bang o db ve
         tableModel = (DefaultTableModel)tbList.getModel();
-        tableModel.setColumnIdentifiers(new Object[]{
+        tableModel.setColumnIdentifiers(new Object[]{  // ten bang
             "Mã Môn", "Tên Môn"
         });
         for(Subject s : listSubjects){
@@ -50,7 +47,7 @@ public class SubjectManagement extends javax.swing.JFrame {
             });
         }
     }
-    private void showRow(){
+    private void showRow(){ // show mon hoc moi them 
         Subject s = listSubjects.get(listSubjects.size()-1);
         tableModel.addRow(new Object[]{
              s.getSubjectID(), s.getSubjectName()
@@ -72,8 +69,7 @@ public class SubjectManagement extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tfName = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -120,16 +116,13 @@ public class SubjectManagement extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Sửa");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnDel.setText("Xoá");
+        btnDel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnDelActionPerformed(evt);
             }
         });
-
-        jButton4.setText("Xoá");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -159,6 +152,11 @@ public class SubjectManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbList);
         if (tbList.getColumnModel().getColumnCount() > 0) {
             tbList.getColumnModel().getColumn(0).setResizable(false);
@@ -183,11 +181,9 @@ public class SubjectManagement extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(37, 37, 37)
@@ -227,9 +223,7 @@ public class SubjectManagement extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(btnDel)))
                 .addGap(43, 43, 43)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(79, Short.MAX_VALUE))
@@ -241,7 +235,7 @@ public class SubjectManagement extends javax.swing.JFrame {
     private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
         
     }//GEN-LAST:event_tfNameActionPerformed
-
+    // them mon hoc
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         Subject subject = new Subject(Integer.parseInt(tfID.getText()),tfName.getText());
         // kiem tra ma mon hoc da ton tai hay chua? neu chua thi up len database 
@@ -251,13 +245,10 @@ public class SubjectManagement extends javax.swing.JFrame {
             UpdateDB up = new UpdateDB();       
             up.dbSubject(subject);             
             listSubjects.add(subject);
+            JOptionPane.showMessageDialog(rootPane, "Thêm môn học thành công !");
             showRow();
         } else JOptionPane.showMessageDialog(rootPane, "Mã môn học đã tồn tại!");
     }//GEN-LAST:event_btnAddActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         MenuGV menu = new MenuGV();
@@ -269,6 +260,27 @@ public class SubjectManagement extends javax.swing.JFrame {
     private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfIDActionPerformed
+    // xoa mon hoc 
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        int index = tbList.getSelectedRow();
+        System.out.println(index);
+        TableModel model = tbList.getModel();
+        int id = Integer.parseInt(model.getValueAt(index, 0).toString());
+        DeleteDB del = new DeleteDB();
+        del.deleteSubject(id);
+        JOptionPane.showMessageDialog(rootPane," Xóa thành công !");
+        tableModel.removeRow(index);
+        
+    }//GEN-LAST:event_btnDelActionPerformed
+    // xu li click chuot vao mon hoc 
+    private void tbListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListMouseClicked
+        int index = tbList.getSelectedRow();
+        TableModel model = tbList.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        String Name = model.getValueAt(index, 1).toString();       
+        tfID.setText(id);        
+        tfName.setText(Name);      
+    }//GEN-LAST:event_tbListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -307,8 +319,7 @@ public class SubjectManagement extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnDel;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

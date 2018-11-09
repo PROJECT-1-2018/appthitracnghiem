@@ -11,52 +11,50 @@ package object;
  */
 public class Questions {
     
-    private int QuestionID;
-    private String QuestionContent;
-    private int TopicID;
-    private int QuestionLevel;
+    private int questionID;
+    private String questionContent;
+    private int topicID;
+    private int questionLevel;
 
-    public Questions() {
+    public Questions(int questionID, String questionContent,int topicID,int questionLevel){
+        this.questionID = questionID;
+        this.questionContent = questionContent;
+        this.topicID = topicID;
+        this.questionLevel = questionLevel;
     }
 
     public int getQuestionID() {
-        return QuestionID;
+        return questionID;
     }
 
-    public void setQuestionID(int QuestionID) {
-        this.QuestionID = QuestionID;
+    public void setQuestionID(int questionID) {
+        this.questionID = questionID;
     }
 
     public String getQuestionContent() {
-        return QuestionContent;
+        return questionContent;
     }
 
-    public void setQuestionContent(String QuestionContent) {
-        this.QuestionContent = QuestionContent;
-    }  
+    public void setQuestionContent(String questionContent) {
+        this.questionContent = questionContent;
+    }
 
     public int getTopicID() {
-        return TopicID;
+        return topicID;
     }
 
-    public void setTopicID(int TopicID) {
-        this.TopicID = TopicID;
+    public void setTopicID(int topicID) {
+        this.topicID = topicID;
     }
 
     public int getQuestionLevel() {
-        return QuestionLevel;
+        return questionLevel;
     }
 
-    public void setQuestionLevel(int QuestionLevel) {
-        this.QuestionLevel = QuestionLevel;
-    }
-    
-    public void addQuestion(){
-        
-    }
-    
+    public void setQuestionLevel(int questionLevel) {
+        this.questionLevel = questionLevel;
+    }    
+}
 
-  
-        
-    }
+   
     

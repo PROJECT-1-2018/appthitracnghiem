@@ -100,37 +100,28 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labelHoten" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonLop" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelNgaysinh" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tfID" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelHoten" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="buttonLop" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelNgaysinh" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonXoa" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <Component id="jDateChooser1" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <Component id="tfName" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <Component id="tfClass" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <Component id="buttonThem" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tfBD" pref="140" max="32767" attributes="0"/>
-                                      <Component id="tfID" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="tfName" alignment="0" pref="139" max="32767" attributes="0"/>
-                                              <Component id="buttonThem" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="tfClass" alignment="0" pref="139" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="buttonXoa" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                                      <Component id="buttonSua" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="521" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -145,19 +136,19 @@
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tfID" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labelNgaysinh" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfBD" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labelNgaysinh" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="labelHoten" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tfName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -171,12 +162,9 @@
                           <Component id="buttonThem" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonXoa" min="-2" pref="31" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonSua" min="-2" pref="31" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="201" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="buttonThoat" min="-2" pref="51" max="-2" attributes="0"/>
@@ -211,8 +199,6 @@
             <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin sinh vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfBD">
-        </Component>
         <Component class="javax.swing.JTextField" name="tfName">
         </Component>
         <Component class="javax.swing.JTextField" name="tfClass">
@@ -229,11 +215,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="buttonSua">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonXoaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -311,6 +295,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ID:"/>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
         </Component>
       </SubComponents>
     </Container>

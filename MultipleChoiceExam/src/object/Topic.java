@@ -11,7 +11,14 @@ package object;
  */
 public class Topic {
     private int topicID,subjectID;
+    private String topicName;
 
+    public Topic(){}
+    public Topic(int topicID, int subjectID, String topicName){
+        this.topicID = topicID;
+        this.subjectID = subjectID;
+        this.topicName = topicName;
+    }
     public int getSubjectID() {
         return subjectID;
     }
@@ -19,7 +26,7 @@ public class Topic {
     public void setSubjectID(int subjectID) {
         this.subjectID = subjectID;
     }
-    private String topicName;
+    
 
     public int getTopicID() {
         return topicID;

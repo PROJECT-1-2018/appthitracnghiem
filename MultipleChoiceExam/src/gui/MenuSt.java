@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package gui;
-
+import gui.TakeExams;
 /**
  *
  * @author Nguyen Viet Tien
@@ -90,7 +90,8 @@ public class MenuSt extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        new TakeExams().setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

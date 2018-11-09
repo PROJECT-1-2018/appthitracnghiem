@@ -22,7 +22,7 @@ public class CheckDB {
     public CheckDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2","root","");
             st = con.createStatement();
         } catch (Exception exception){
             System.out.println(exception);
@@ -39,7 +39,7 @@ public class CheckDB {
         return false;
     }
     public boolean CheckTeacher(String username,String password){               
-        return (username.equals("root") && password.equals("duong") ) ;       
+        return (username.equals("") && password.equals("") ) ;       
     }
     public boolean CheckStudentAdd(int id){        
         try {
@@ -54,6 +54,16 @@ public class CheckDB {
     public boolean CheckSubjectAdd(int id){        
         try {
             String sql = "select * from subjects where SubjectID = '"+id+"'   ";            
+            rs = st.executeQuery(sql);
+            if (rs.next()) return true;            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }     
+        return false;
+    }
+    public boolean CheckQuestionID(int id){        
+        try {
+            String sql = "select * from question where QuestionID = '"+id+"'   ";            
             rs = st.executeQuery(sql);
             if (rs.next()) return true;            
         } catch (Exception e) {

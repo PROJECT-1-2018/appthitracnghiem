@@ -5,12 +5,29 @@
  */
 package gui;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import database.DeleteDB;
+import database.GetDB;
+import database.UpdateDB;
+import static java.rmi.Naming.list;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import object.Student;
+import object.Subject;
+import object.Topic;
+
 /**
  *
  * @author DuongSon
  */
 public class TopicManagerment extends javax.swing.JFrame {
-
+        private ArrayList<Topic> list;
+        DefaultTableModel model;
+        
     /**
      * Creates new form TopicManagerment
      */
@@ -18,6 +35,33 @@ public class TopicManagerment extends javax.swing.JFrame {
         initComponents();
         setBounds(50,50,800,450);
         setResizable(false);
+        list = new ArrayList<> ();
+        model = (DefaultTableModel) jTable1.getModel(); //sau khi bang duoc cap nhat voi them hoac xoa row
+        setCbSubject();
+        addTabel();
+        
+    }
+    public void setCbSubject(){
+        ArrayList <Subject> listSubjectName = new GetDB().getListSubject();
+        for(int i=0; i< listSubjectName.size(); i++){
+            cbSubject.addItem(listSubjectName.get(i).getSubjectName());
+            
+        }
+        
+    }
+    
+    public void addTabel(){
+        list = new GetDB().getListTopic();
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setColumnIdentifiers(new Object[]{
+            "Mã chủ đề", "Tên chủ đề", "Môn học"
+        });
+        
+        for(Topic tp : list){
+            model.addRow(new Object[]{
+                tp.getTopicID(),tp.getTopicName(),new GetDB().getNameSubject(tp.getSubjectID())
+            });
+        }
     }
 
     /**
@@ -32,19 +76,19 @@ public class TopicManagerment extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txTopicName = new javax.swing.JTextField();
+        btThem = new javax.swing.JButton();
+        btXoa = new javax.swing.JButton();
+        btThoat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txTopicID = new javax.swing.JTextField();
+        cbSubject = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Chủ Đề");
-        setPreferredSize(new java.awt.Dimension(800, 450));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -54,53 +98,58 @@ public class TopicManagerment extends javax.swing.JFrame {
 
         jLabel3.setText("Môn học : ");
 
-        jTextField1.setText("ten chu de");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txTopicName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txTopicNameActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mon 1 ", "Mon 2", "Mon 3", "Item 2", "Item 3", "Item 4" }));
-
-        jButton1.setText("Thêm ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btThem.setText("Thêm ");
+        btThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btThemActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Xóa");
-
-        jButton3.setText("Sửa");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btXoa.setText("Xóa");
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btXoaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Thoát");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btThoat.setText("Thoát");
+        btThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btThoatActionPerformed(evt);
             }
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Mã chủ đề", "Tên chủ đề ", "Môn học "
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Danh Sách Chủ Đề");
+
+        jLabel5.setText("Mã chủ đề:");
+
+        cbSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSubjectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,31 +158,33 @@ public class TopicManagerment extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txTopicID))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txTopicName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel1)))))
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(118, 118, 118))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(694, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btThoat)
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
@@ -148,44 +199,110 @@ public class TopicManagerment extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                            .addComponent(jLabel5)
+                            .addComponent(txTopicID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txTopicName, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(btThem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btXoa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btThoat)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txTopicNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txTopicNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txTopicNameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+        Topic topic = new Topic();
+        topic.setTopicID(Integer.parseInt(txTopicID.getText()));
+        topic.setTopicName(txTopicName.getText());
+        
+        Object selected = cbSubject.getSelectedItem();
+        String subjectName = selected.toString();
+        ArrayList <Subject> listSubjectName = new GetDB().getListSubject();
+        int id = 0;
+        for (Subject sj: listSubjectName){
+            if(sj.getSubjectName().equals(subjectName))
+                id = sj.getSubjectID();
+        }
+            int subjectID = id;
+        topic.setSubjectID(id);
+        cbSubject.setSelectedItem(cbSubject.getSelectedItem());
+        
+        UpdateDB up = new UpdateDB();       
+            up.dbTopic(topic);      
+        list.add(topic);
+        showResult();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btThemActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
+        MenuGV menu = new MenuGV();
+        menu.setVisible(true);
+        setVisible(false);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btThoatActionPerformed
+    
+    
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+                       
+         try{
+             int SelectRow = jTable1.getSelectedRow();             
+             int id = Integer.parseInt(model.getValueAt(SelectRow, 0).toString()) ;           
+             DeleteDB del = new DeleteDB();
+             del.deleteTopic(id);
+             model.removeRow(SelectRow);
+         }catch (Exception ex){
+             JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");
+         }
+         JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+    }//GEN-LAST:event_btXoaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void cbSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubjectActionPerformed
+        Object selected = cbSubject.getSelectedItem();
+        String subjectName = selected.toString();
+        ArrayList <Subject> listSubjectName = new GetDB().getListSubject();
+        int id = 0;
+        for (Subject sj: listSubjectName){
+            if(sj.getSubjectName().equals(subjectName))
+                id = sj.getSubjectID();
+        }
+            int subjectID = id;
+        
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
+    }//GEN-LAST:event_cbSubjectActionPerformed
+    
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int SelectRow = jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+      //  int ID = Integer.parseInt(model.getValueAt(SelectRow, 0).toString()) ;     
+        txTopicID.setText(model.getValueAt(SelectRow, 0).toString());
+        txTopicName.setText(model.getValueAt(SelectRow, 1).toString());
+        
+         
+// TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+    
+    private void showResult(){
+        
+        Topic topic = list.get(list.size() - 1);
+        model.addRow(new Object[]{ topic.getTopicID(), topic.getTopicName(), cbSubject.getSelectedItem()});
+    }
     /**
      * @param args the command line arguments
      */
@@ -222,17 +339,18 @@ public class TopicManagerment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btThem;
+    private javax.swing.JButton btThoat;
+    private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbSubject;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txTopicID;
+    private javax.swing.JTextField txTopicName;
     // End of variables declaration//GEN-END:variables
 }
