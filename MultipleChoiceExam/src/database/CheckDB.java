@@ -28,9 +28,9 @@ public class CheckDB {
             System.out.println(exception);
         }
     }
-    public boolean CheckStudentLogin(String username,String password){
+    public boolean CheckStudentLogin(String username,String password){       
         try {
-            String sql = "select * from createsignin where UserName = ' " + username +" ' and UserPw = '"+password+"'";
+            String sql = "select * from createsignin where UserName = '" +username+"' and UserPw = '"+password+"'";
             rs = st.executeQuery(sql);
             if (rs.next()) return true;            
         } catch (Exception e) {
@@ -38,12 +38,29 @@ public class CheckDB {
         }     
         return false;
     }
-    public boolean CheckTeacher(String username,String password){               
-        return (username.equals("") && password.equals("") ) ;       
+    public boolean CheckTeacher(String username,String password){                      
+        try {
+            String sql = "select * from teacher where UserName = '" +username+"' and PassWord = '"+password+"'";
+            rs = st.executeQuery(sql);
+            if (rs.next()) return true;            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }     
+        return false;   
     }
     public boolean CheckStudentAdd(int id){        
         try {
             String sql = "select * from student where StudentID = '"+id+"'   ";            
+            rs = st.executeQuery(sql);
+            if (rs.next()) return true;            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }     
+        return false;
+    }
+    public boolean CheckStudentInRoom(int id){        
+        try {
+            String sql = "select * from createsignin where StudentID = '"+id+"'   ";            
             rs = st.executeQuery(sql);
             if (rs.next()) return true;            
         } catch (Exception e) {
@@ -64,6 +81,16 @@ public class CheckDB {
     public boolean CheckQuestionID(int id){        
         try {
             String sql = "select * from question where QuestionID = '"+id+"'   ";            
+            rs = st.executeQuery(sql);
+            if (rs.next()) return true;            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }     
+        return false;
+    }
+    public boolean CheckTestID(int id){        
+        try {
+            String sql = "select * from test where testID = '"+id+"'   ";            
             rs = st.executeQuery(sql);
             if (rs.next()) return true;            
         } catch (Exception e) {

@@ -63,6 +63,40 @@ public class DeleteDB {
             
          }
      }
+     public void deleteTest(int id ){
+         String query2 = "delete from createtest where testID = ?";
+         try (PreparedStatement p = con.prepareStatement(query2)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception ex){
+            
+         }
+         String query1 = "delete from test where testID = ?";
+         try (PreparedStatement p = con.prepareStatement(query1)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception ex){
+            
+         }         
+         
+     }
+     public void deleteQuestion(int id ){
+         String query2 = "delete from answer where QuestionID = ?";
+         try (PreparedStatement p = con.prepareStatement(query2)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception ex){
+            
+         }
+         String query1 = "delete from question where QuestionID = ?";
+         try (PreparedStatement p = con.prepareStatement(query1)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception ex){
+            
+         }         
+         
+     }
     
     public static void main(String[] args) {
         DeleteDB de = new DeleteDB();

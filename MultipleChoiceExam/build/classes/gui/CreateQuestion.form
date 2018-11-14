@@ -45,32 +45,6 @@
                       </Group>
                       <Component id="tfContent" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfID" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cbSubject" max="32767" attributes="0"/>
-                              <Component id="jLabel10" min="-2" pref="80" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbTopic" min="-2" pref="125" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="cbLevel" min="-2" pref="72" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -79,6 +53,35 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Component id="tfAnswer4" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tfID" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel10" max="32767" attributes="0"/>
+                              <Component id="jLabel2" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbSubject" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="cbLevel" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cbTopic" min="-2" pref="125" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="lbNumberOfQuestion" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -90,7 +93,7 @@
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="199" max="32767" attributes="0"/>
+              <EmptySpace pref="201" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -116,6 +119,7 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbNumberOfQuestion" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="tfContent" min="-2" pref="55" max="-2" attributes="0"/>
@@ -210,9 +214,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tfContent">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfContentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -326,6 +330,14 @@
           <Font name="Times New Roman" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ch&#xfa; th&#xed;ch : M&#x1ee9;c &#x111;&#x1ed9; 1 - D&#x1ec5; ; M&#x1ee9;c &#x111;&#x1ed9; 2 - Trung b&#xec;nh ; M&#x1ee9;c &#x111;&#x1ed9; 3 - Kh&#xf3; "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbNumberOfQuestion">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng c&#xe2;u h&#x1ecf;i hi&#x1ec7;n t&#x1ea1;i :"/>
       </Properties>
     </Component>
   </SubComponents>

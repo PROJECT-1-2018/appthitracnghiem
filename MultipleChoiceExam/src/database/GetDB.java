@@ -15,6 +15,7 @@ import object.Questions;
 import object.Student;
 import object.Subject;
 import object.StudentResult;
+import object.Test;
 import object.Topic;
 
 /**
@@ -48,7 +49,7 @@ public class GetDB {
         }
         return listSubjects;
     }
-    public String getNameSubject(int id){ // lay du lieu cua subject cho vao mot danh sach arraylist
+    public String getNameSubject(int id){ // 
         String name="";
         try {
            String query = "select * from subjects where SubjectID='"+id+"'";
@@ -60,7 +61,7 @@ public class GetDB {
         }
         return name ;
     }
-    public ArrayList getListTopic(int subjectID ){ // lay du lieu cua subject cho vao mot danh sach arraylist
+    public ArrayList getListTopic(int subjectID ){ // 
         ArrayList<Topic> listTopic = new ArrayList<>();
         try {
            String query = "select * from topic where SubjectID = '"+subjectID+"'";
@@ -114,6 +115,18 @@ public class GetDB {
         } catch (Exception e) {
         }
         return listQuestionses;
+    }
+    public int getNumberOfQuestion(){ // lay du lieu cua subject cho vao mot danh sach arraylist   
+        int number = 0;
+        try {
+           String query = "select count(*) as number from question";
+            rs = st.executeQuery(query);
+            while (rs.next()){       
+                number = rs.getInt("number");                                           
+            }
+        } catch (Exception e) {
+        }
+        return number;
     }
     
     public ArrayList getListQuestionFromTopic(int id){ // tim cau hoi dua vao chu de
@@ -208,7 +221,75 @@ public class GetDB {
         return listStd;
     }
     
+    public ArrayList getListTest(){ 
+        ArrayList<Test> listTest = new ArrayList<>();
+        try {
+           String query = "select * from Test";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 Test t = new Test(rs.getInt("TestID"),rs.getInt("AmountQuestion"),rs.getInt("TopicID"),
+                                   rs.getInt("TestTime"),rs.getInt("Level1"),rs.getInt("Level2"),
+                                   rs.getInt("Level3"),rs.getInt("MaxPoint"));
+                 listTest.add(t);
+                 
+            }
+        } catch (Exception e) {
+        }
+        return listTest;
+    }
+     public String findNameTopFrId(int id){ 
+        String s = null;
+        try {
+           String query = "select TopicName from Topic where TopicID = ";
+            rs = st.executeQuery(query+ id);
+            while (rs.next()){                
+                 s =rs.getString("TopicName");     
+            }
+        } catch (Exception e) {
+        }
+        return s;
+    }
+     public String findNameSubFrTop(int id){ 
+        String s = null;
+        try {
+           String query = "select SubjectName from Subjects,Topic where (Topic.SubjectID = Subjects.SubjectID) and (TopicID = ";
+            rs = st.executeQuery(query+ id +")");
+            while (rs.next()){                
+                 s =rs.getString("SubjectName");     
+            }
+        } catch (Exception e) {
+        }
+        return s;
+    }
     
+    public ArrayList getListLevel (int idTopic, int level ) {
+        ArrayList <Questions> listLv = new ArrayList<> ();
+        try {
+            String q1 = "Select * From Question where (TopicId = ";
+            String q2 = "and ( QuestionLevel = ";
+            rs = st.executeQuery(q1+ idTopic+")" + q2+ level +")");
+            while (rs.next()){
+                listLv.add(new Questions(rs.getInt("QuestionID"), rs.getString("QuestionContent"), 
+                        rs.getInt("TopicID"), rs.getInt("QuestionLevel")));
+            }
+        }catch (Exception ex){
+             ex.printStackTrace();
+        }
+        return listLv;
+    }
+    public int countQuestionLevel (int idTopic, int level){
+        int count = 0;
+        try {
+           String query = "select count(QuestionID) from Question where (QuestionLevel = '"+level+"') and (TopicID = '"+idTopic+"') ";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 count =rs.getInt("count(QuestionID)");     
+            }
+        } catch (Exception e) {
+        }
+        return count;
+        
+    }
     public static void main(String[] args) {
         GetDB get = new GetDB();
         ArrayList<Subject> ar = get.getListSubject();

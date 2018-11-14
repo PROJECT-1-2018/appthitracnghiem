@@ -16,6 +16,10 @@ public class Questions {
     private int topicID;
     private int questionLevel;
 
+     public Questions(){
+        
+    }
+
     public Questions(int questionID, String questionContent,int topicID,int questionLevel){
         this.questionID = questionID;
         this.questionContent = questionContent;

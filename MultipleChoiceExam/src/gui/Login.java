@@ -66,7 +66,6 @@ public class Login extends javax.swing.JFrame {
         labelMSSV = new javax.swing.JLabel();
         labelMatkhau = new javax.swing.JLabel();
         tfMS = new javax.swing.JTextField();
-        tfMK = new javax.swing.JTextField();
         buttonDangNhap = new javax.swing.JButton();
         buttonThoat = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -76,6 +75,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cbGV = new javax.swing.JCheckBox();
         cbSV = new javax.swing.JCheckBox();
+        tfMK = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -149,12 +149,6 @@ public class Login extends javax.swing.JFrame {
 
         labelMatkhau.setText("Mật khẩu : ");
 
-        tfMK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfMKActionPerformed(evt);
-            }
-        });
-
         buttonDangNhap.setText("Đăng nhập");
         buttonDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +191,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbGV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(cbSV))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -211,9 +205,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(labelMatkhau)
                             .addComponent(labelMSSV))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfMS, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfMK, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfMS, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                            .addComponent(tfMK))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4))
         );
@@ -238,8 +232,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(tfMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMatkhau))
+                            .addComponent(labelMatkhau)
+                            .addComponent(tfMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttonDangNhap)
@@ -250,17 +244,11 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMKActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_tfMKActionPerformed
-
     private void buttonDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDangNhapActionPerformed
 
         CheckDB check = new CheckDB();
         String username = tfMS.getText();
-        String password = tfMK.getText();
-        System.out.println(check.CheckTeacher(username,password));
+        String password = tfMK.getText();       
         if (cbGV.isSelected() && cbSV.isSelected() ) JOptionPane.showMessageDialog(rootPane, "Chỉ được chọn giáo viên hoặc sinh viên !");
         else 
         if (cbGV.isSelected()) {
@@ -272,10 +260,14 @@ public class Login extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(rootPane,"Mã số hoặc mật khẩu nhập sai, yêu cầu nhập lại !");    
             }
         }                        
-        else if (cbSV.isSelected()){
-            setVisible(false);
-            MenuSt menu = new MenuSt();
-            menu.setVisible(true);
+        else if (cbSV.isSelected()){           
+            if (check.CheckStudentLogin(username,password)){
+                setVisible(false);
+                MenuSt menu = new MenuSt();
+                menu.setVisible(true);
+            }else {
+                JOptionPane.showMessageDialog(rootPane,"Mã số hoặc mật khẩu nhập sai, yêu cầu nhập lại !");   
+            }
         }         
            
     }//GEN-LAST:event_buttonDangNhapActionPerformed
@@ -364,7 +356,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelMSSV;
     private javax.swing.JLabel labelMatkhau;
-    private javax.swing.JTextField tfMK;
+    private javax.swing.JPasswordField tfMK;
     private javax.swing.JTextField tfMS;
     // End of variables declaration//GEN-END:variables
 }

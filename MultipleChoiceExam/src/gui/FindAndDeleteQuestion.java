@@ -5,8 +5,10 @@
  */
 package gui;
 
+import database.DeleteDB;
 import database.GetDB;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import object.Answer;
@@ -47,6 +49,7 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
         }
     }
     private void addCbSuject(){       // add mon hoc vao combobox
+        cbSubject.removeAll();
         for(Subject s : listSubjects){            
             cbSubject.addItem(s.getSubjectName());
         }
@@ -288,7 +291,23 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        int index = tbList.getSelectedRow();
+        TableModel model = tbList.getModel();
+        int id = Integer.parseInt(model.getValueAt(index, 0).toString());  
+        try {
+            new DeleteDB().deleteQuestion(id);
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");  
+            addCbSuject(); 
+            lbID.setText("Mã số: "+id);
+            jTextArea1.setText("Nội dung : " );
+            jTextArea1.setWrapStyleWord(true);
+            lbAn1.setText("Đáp án 1: ");
+            lbAn2.setText("Đáp án 2: ");
+            lbAn3.setText("Đáp án 3: ");
+            lbAn4.setText("Đáp án 4: ");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import object.Subject;
 import object.Questions;
 import object.Answer;
+import object.CheckString;
 import object.Topic;
 
 /**
@@ -31,13 +32,9 @@ public class CreateQuestion extends javax.swing.JFrame {
         initComponents();
         setBounds(50,50,800,500);
         setResizable(false);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        addTable();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);       
         addCbSuject();      // them mon hoc   
-    }
-    private void addTable(){
-        
-    }
+    }   
     private void addCbSuject(){       // add mon hoc vao combobox
         for(Subject s : listSubjects){            
             cbSubject.addItem(s.getSubjectName());
@@ -82,6 +79,7 @@ public class CreateQuestion extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         cbLevel = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        lbNumberOfQuestion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thêm Câu Hỏi");
@@ -113,7 +111,11 @@ public class CreateQuestion extends javax.swing.JFrame {
             }
         });
 
-        tfContent.setText("...");
+        tfContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfContentActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Nội Dung : ");
@@ -163,6 +165,9 @@ public class CreateQuestion extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel11.setText("Chú thích : Mức độ 1 - Dễ ; Mức độ 2 - Trung bình ; Mức độ 3 - Khó ");
 
+        lbNumberOfQuestion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbNumberOfQuestion.setText("Số lượng câu hỏi hiện tại :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,39 +190,41 @@ public class CreateQuestion extends javax.swing.JFrame {
                             .addComponent(tfAnswer1))
                         .addComponent(tfContent)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2))
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cbSubject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(tfAnswer4))))
+                                .addComponent(tfAnswer4)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cbTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbNumberOfQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
@@ -238,7 +245,8 @@ public class CreateQuestion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel10)
-                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNumberOfQuestion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfContent, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -281,7 +289,7 @@ public class CreateQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbTopicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTopicActionPerformed
-
+            lbNumberOfQuestion.setText("Số câu hỏi hiện tại: "+new GetDB().getNumberOfQuestion());
             Object selected = cbTopic.getSelectedItem();
             if (selected != null) // kiem tra neu co chu de thi moi lay ve duoc
             {            
@@ -311,39 +319,48 @@ public class CreateQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSubjectActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-             int questionID = Integer.parseInt(tfID.getText());  // nhap id cau hoi 
-             if (new CheckDB().CheckQuestionID(questionID) && questionID == 0)    // kiem tra ma cau hoi da ton tai chua
-                 JOptionPane.showMessageDialog(rootPane, "mã câu hỏi đã tồn tại !");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "mã câu hỏi phải là một số !");
-        }
-        int questionID = Integer.parseInt(tfID.getText());  // nhap id cau hoi 
-        Questions questions = new Questions(questionID, tfContent.getText(), topicID, level);
-        Answer answer1 = new Answer(0, tfAnswer1.getText(), questionID, true);
-        Answer answer2 = new Answer(0, tfAnswer2.getText(), questionID, false);
-        Answer answer3 = new Answer(0, tfAnswer3.getText(), questionID, false);
-        Answer answer4 = new Answer(0, tfAnswer4.getText(), questionID, false);
-        // up len database 
-        try {
-            UpdateDB up = new UpdateDB();
-            up.dbQuestion(questions);
-            up.dbAnswer(answer1);
-            up.dbAnswer(answer2);
-            up.dbAnswer(answer3);
-            up.dbAnswer(answer4);
-             JOptionPane.showMessageDialog(rootPane, "Thêm câu hỏi thành công !");
-            tfID.setText(""+(questionID+1));
-            tfContent.setText("");
-            tfAnswer1.setText("");
-            tfAnswer2.setText("");
-            tfAnswer3.setText("");
-            tfAnswer4.setText("");
-        } catch (Exception e) {
-             JOptionPane.showMessageDialog(rootPane, "Thêm câu hỏi không thành công !");
-        }
-        
-       
+        CheckString check = new CheckString();
+        if (check.isData(tfID.getText()) && check.isData(tfContent.getText())
+                && check.isData(tfAnswer1.getText()) && check.isData(tfAnswer2.getText())
+                && check.isData(tfAnswer3.getText()) && check.isData(tfAnswer4.getText()))
+        {
+            try {
+                 int questionID = Integer.parseInt(tfID.getText());  // nhap id cau hoi 
+                 if (new CheckDB().CheckQuestionID(questionID) || questionID == 0)    // kiem tra ma cau hoi da ton tai chua
+                     JOptionPane.showMessageDialog(rootPane, "mã câu hỏi đã tồn tại !");
+                 else
+                 {
+                    // int questionID = Integer.parseInt(tfID.getText());  // nhap id cau hoi 
+                    Questions questions = new Questions(questionID, tfContent.getText(), topicID, level);
+                    Answer answer1 = new Answer(0, tfAnswer1.getText(), questionID, true);
+                    Answer answer2 = new Answer(0, tfAnswer2.getText(), questionID, false);
+                    Answer answer3 = new Answer(0, tfAnswer3.getText(), questionID, false);
+                    Answer answer4 = new Answer(0, tfAnswer4.getText(), questionID, false);
+                    // up len database 
+                    try {
+                        UpdateDB up = new UpdateDB();
+                        up.dbQuestion(questions);
+                        up.dbAnswer(answer1);
+                        up.dbAnswer(answer2);
+                        up.dbAnswer(answer3);
+                        up.dbAnswer(answer4);
+                         JOptionPane.showMessageDialog(rootPane, "Thêm câu hỏi thành công !");
+                        tfID.setText(""+(questionID+1));
+                        tfContent.setText("");
+                        tfAnswer1.setText("");
+                        tfAnswer2.setText("");
+                        tfAnswer3.setText("");
+                        tfAnswer4.setText("");
+                        lbNumberOfQuestion.setText("Số câu hỏi hiện tại: "+new GetDB().getNumberOfQuestion());
+                    } catch (Exception e) {
+                         JOptionPane.showMessageDialog(rootPane, "Thêm câu hỏi không thành công !");
+                    }
+                }
+           } catch (Exception e) {
+               JOptionPane.showMessageDialog(rootPane, "mã câu hỏi phải là một số > 0!");
+           }   
+        } else
+            JOptionPane.showMessageDialog(rootPane,"Chưa nhập đủ dữ liệu !");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLevelActionPerformed
@@ -353,6 +370,10 @@ public class CreateQuestion extends javax.swing.JFrame {
         if (levelname.equals("2")) this.level = 2;
         if (levelname.equals("3")) this.level = 3;             
     }//GEN-LAST:event_cbLevelActionPerformed
+
+    private void tfContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfContentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfContentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -407,6 +428,7 @@ public class CreateQuestion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbNumberOfQuestion;
     private javax.swing.JTextField tfAnswer1;
     private javax.swing.JTextField tfAnswer2;
     private javax.swing.JTextField tfAnswer3;

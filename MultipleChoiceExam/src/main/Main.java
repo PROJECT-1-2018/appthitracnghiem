@@ -6,6 +6,7 @@
 package main;
 
 import Gui.Login;
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
@@ -16,7 +17,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 public class Main {
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(NimbusLookAndFeel.class.getName());
+            UIManager.setLookAndFeel(WindowsLookAndFeel.class.getName());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

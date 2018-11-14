@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import object.Answer;
+import object.CreateTest;
+import object.InforLoginStudent;
 import object.Questions;
 import object.Result;
 import object.Student;
@@ -103,15 +105,16 @@ public class UpdateDB {
         }
     }
     public void dbTest(Test test){                  // cap nhat de thi 
-        String sql ="INSERT INTO test VALUES(?,?,?,?,?,?,?)";
+        String sql ="INSERT INTO test  VALUES(?,?,?,?,?,?,?,?)";
         try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
+            p.setInt(1,test.getTestID());
             p.setInt(2,test.getAmountQuestion());
             p.setInt(3,test.getTopicID());
             p.setInt(4,test.getTestTime());
             p.setInt(5,test.getLevel1());
             p.setInt(6,test.getLevel2());
-            p.setInt(7,test.getLevel3());                        
+            p.setInt(7,test.getLevel3());
+            p.setInt(8,test.getMaxPoint());
             p.executeUpdate();            
         } catch (SQLException e) {
                System.out.println(e.getMessage());
@@ -124,6 +127,28 @@ public class UpdateDB {
             p.setDate(2, (Date)res.getResultDate());
             p.setFloat(3,res.getPoints());
             p.setInt(4,res.getTestID());                               
+            p.executeUpdate();            
+        } catch (SQLException e) {
+               System.out.println(e.getMessage());
+        }
+    }
+    public void dbCreateSignIn(InforLoginStudent infor){           // cap nhat ketqua
+        String sql ="INSERT INTO createsignin VALUES(?,?,?,?)";
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
+            p.setInt(1,infor.getStudentID());
+            p.setString(2, infor.getUserName());
+            p.setString(3,infor.getUserPw());
+            p.setInt(4,infor.getTestID());                               
+            p.executeUpdate();            
+        } catch (SQLException e) {
+               System.out.println(e.getMessage());
+        }
+    }
+     public void dbCreateTest(CreateTest ct){           // cap nhat câu hỏi vào đề thi
+        String sql ="INSERT INTO createtest VALUES(?,?)";
+        try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
+            p.setInt(1,ct.getQuestionID());
+            p.setInt(2,ct.getTestID());                            
             p.executeUpdate();            
         } catch (SQLException e) {
                System.out.println(e.getMessage());

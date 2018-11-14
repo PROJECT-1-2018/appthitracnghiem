@@ -5,11 +5,9 @@
         <group>
             <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/FindAndDeleteQuestion.java</file>
             <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/database/GetDB.java</file>
-            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/QuestionManagerment.java</file>
-            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/SubjectManagement.java</file>
-            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/ListStudent.java</file>
-            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/MenuGV.java</file>
-            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/CreateRoom.java</file>
+            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/database/DeleteDB.java</file>
+            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/gui/TestManagerment.java</file>
+            <file>file:/C:/Users/DuongSon/Documents/NetBeansProjects/appthitracnghiem-up/MultipleChoiceExam/src/database/UpdateDB.java</file>
         </group>
     </open-files>
 </project-private>

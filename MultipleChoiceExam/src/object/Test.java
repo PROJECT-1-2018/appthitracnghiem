@@ -26,6 +26,19 @@ public class Test {
     private String listQuestion;
     private int maxPoint;
     
+    public Test(){
+        
+    }
+    public Test(int testID, int amountQuestion, int TopicID, int testTime, int Level1, int Level2,int Level3, int maxPoint){
+        this.amountQuestion = amountQuestion;
+        this.testID = testID;
+        this.topicID = TopicID;
+        this.testTime = testTime;
+        this.level1 = Level1;
+        this.level2 = Level2;
+        this.level3 = Level3;
+        this.maxPoint = maxPoint;
+    }
     public void setTestID (int testID){
         this.testID = testID;
     }
@@ -84,6 +97,10 @@ public class Test {
     
     public void setMaxPoint (int maxPoint){
         this.maxPoint = maxPoint;
+    }
+    
+    public int getMaxPoint (){
+        return maxPoint;
     }
     
     
