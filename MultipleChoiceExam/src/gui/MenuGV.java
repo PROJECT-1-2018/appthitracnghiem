@@ -159,8 +159,7 @@ public class MenuGV extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        CreateRoom creRoom = new CreateRoom();
-        creRoom.setVisible(true);
+        new NumberStudent().setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
 

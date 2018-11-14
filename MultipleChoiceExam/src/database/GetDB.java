@@ -128,7 +128,18 @@ public class GetDB {
         }
         return number;
     }
-    
+    public String getNameStudentFromID(int id){ // lay du lieu cua subject cho vao mot danh sach arraylist   
+        String s ="";
+        try {
+           String query = "select StudentName from student where StudentID = '"+id+"' ";
+            rs = st.executeQuery(query);
+            while (rs.next()){       
+                s = rs.getString("StudentName");                                           
+            }
+        } catch (Exception e) {
+        }
+        return s;
+    }
     public ArrayList getListQuestionFromTopic(int id){ // tim cau hoi dua vao chu de
         ArrayList<Questions> listQuestionses = new ArrayList<Questions>();
         try {
@@ -225,6 +236,22 @@ public class GetDB {
         ArrayList<Test> listTest = new ArrayList<>();
         try {
            String query = "select * from Test";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 Test t = new Test(rs.getInt("TestID"),rs.getInt("AmountQuestion"),rs.getInt("TopicID"),
+                                   rs.getInt("TestTime"),rs.getInt("Level1"),rs.getInt("Level2"),
+                                   rs.getInt("Level3"),rs.getInt("MaxPoint"));
+                 listTest.add(t);
+                 
+            }
+        } catch (Exception e) {
+        }
+        return listTest;
+    }
+    public ArrayList getListTestFromTopic(int topicID){ 
+        ArrayList<Test> listTest = new ArrayList<>();
+        try {
+           String query = "select * from Test where TopicID = '"+topicID+"' ";
             rs = st.executeQuery(query);
             while (rs.next()){                
                  Test t = new Test(rs.getInt("TestID"),rs.getInt("AmountQuestion"),rs.getInt("TopicID"),

@@ -5,6 +5,7 @@
  */
 package object;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -52,6 +53,5 @@ public class InforLoginStudent {
 
     public void setUserPw(String userPw) {
         this.userPw = userPw;
-    }
-    
+    }    
 }

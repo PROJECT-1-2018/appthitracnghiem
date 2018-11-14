@@ -5,14 +5,22 @@
  */
 package object;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author DuongSon
  */
-public class CheckString {
+public class CheckAll {
     public boolean isData(String s){
         if (s.equals("")) return false;
         return true;
+    }
+    public boolean  checkStudentExist(ArrayList<InforLoginStudent> infor , int id){
+        for (InforLoginStudent s :infor){
+            if (s.getStudentID() == id) return false;
+        }
+        return  true;
     }
     
 }

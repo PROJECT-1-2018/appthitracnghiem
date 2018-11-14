@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import object.Subject;
 import object.Questions;
 import object.Answer;
-import object.CheckString;
+import object.CheckAll;
 import object.Topic;
 
 /**
@@ -242,11 +242,12 @@ public class CreateQuestion extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(cbTopic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel10)
-                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbNumberOfQuestion))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNumberOfQuestion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel10)
+                        .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfContent, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -319,7 +320,7 @@ public class CreateQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSubjectActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CheckString check = new CheckString();
+        CheckAll check = new CheckAll();
         if (check.isData(tfID.getText()) && check.isData(tfContent.getText())
                 && check.isData(tfAnswer1.getText()) && check.isData(tfAnswer2.getText())
                 && check.isData(tfAnswer3.getText()) && check.isData(tfAnswer4.getText()))
