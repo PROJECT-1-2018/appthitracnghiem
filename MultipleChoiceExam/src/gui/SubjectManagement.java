@@ -262,8 +262,7 @@ public class SubjectManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_tfIDActionPerformed
     // xoa mon hoc 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        int index = tbList.getSelectedRow();
-        System.out.println(index);
+        int index = tbList.getSelectedRow();      
         TableModel model = tbList.getModel();
         int id = Integer.parseInt(model.getValueAt(index, 0).toString());
         DeleteDB del = new DeleteDB();

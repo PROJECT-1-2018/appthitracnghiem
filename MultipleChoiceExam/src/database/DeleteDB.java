@@ -33,15 +33,140 @@ public class DeleteDB {
         }        
     }    
     
-    public void deleteSubject(int id){
+    public void deleteSubject(int id){  // xoa subject -> xoa topic lien quan 
+        deleteTopicFromSubject(id);
         String sql = "DELETE FROM subjects WHERE SubjectID = ?";
         try (PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,id);
             p.executeUpdate();
         } catch (Exception e) {
-        }        
+            System.out.println(e.getMessage());
+        }                
     }
+    public void deleteTopicFromSubject(int subjectID ){ //      xoa topic tu subjectID   
+        try {           
+                String query = "select * from topic where SubjectID = '"+subjectID+"'";
+                rs = st.executeQuery(query);
+                while (rs.next()){                           
+                    int testID = rs.getInt("TopicID");                    
+                    deleteTopic(testID);
+                    System.out.println(testID+"-ok");
+                    query = "select * from topic where SubjectID = '"+subjectID+"'";
+                    rs = st.executeQuery(query);
+                }            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }                  
+    }    
+              
+     public void deleteTopic (int id ){
+         // xoa test
+         try {  // tim test lien quan den topic
+           String query = "select * from test where TopicID = '"+id+"'";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 int testID = rs.getInt("TestID"); 
+                 deleteTest(testID);
+                 query = "select * from test where TopicID = '"+id+"'";
+                 rs = st.executeQuery(query);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }       
+         // xoa question 
+         try {  // tim question lien quan den topic
+           String query = "select * from question where TopicID = '"+id+"'";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 int questionID = rs.getInt("QuestionID"); 
+                 deleteQuestion(questionID);
+                 query = "select * from question where TopicID = '"+id+"'";
+                 rs = st.executeQuery(query);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }       
+         //xoa topic 
+         String query = "delete from topic where topicID = ?";
+         try (PreparedStatement p = con.prepareStatement(query)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){      
+             System.out.println(e.getMessage());
+         }
+     }
+     public void deleteTest(int id ){
+         String query3 = "delete from result where testID = ?";
+         try (PreparedStatement p = con.prepareStatement(query3)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){     
+             System.out.println(e.getMessage());
+         }
+            
+         String query2 = "delete from createtest where testID = ?";
+         try (PreparedStatement p = con.prepareStatement(query2)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){  
+             System.out.println(e.getMessage());
+         }
+         String query4 = "delete from createsignin where testID = ?";
+         try (PreparedStatement p = con.prepareStatement(query4)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){      
+             System.out.println(e.getMessage());
+         }
+         String query1 = "delete from test where testID = ?";
+         try (PreparedStatement p = con.prepareStatement(query1)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){
+            System.out.println(e.getMessage());
+         }         
+         
+     }
+     public void deleteQuestion(int id ){
+         String query3 = "delete from createtest where QuestionID = ?";
+         try (PreparedStatement p = con.prepareStatement(query3)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){
+            System.out.println(e.getMessage());
+         }
+         String query2 = "delete from answer where QuestionID = ?";
+         try (PreparedStatement p = con.prepareStatement(query2)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){
+            System.out.println(e.getMessage());
+         }
+         String query1 = "delete from question where QuestionID = ?";
+         try (PreparedStatement p = con.prepareStatement(query1)){
+             p.setInt(1, id);
+             p.executeUpdate();
+         }catch (Exception e){
+            System.out.println(e.getMessage());
+         }         
+         
+     }
      public void DelStudent(Student st){
+         String query4 = "delete from createsignin where StudentID = ?";
+         try (PreparedStatement p = con.prepareStatement(query4)){
+             p.setInt(1, st.getStudentID());
+             p.executeUpdate();
+         }catch (Exception e){            
+             System.out.println(e.getMessage());
+         }
+         String query3 = "delete from result where StudentID = ?";
+         try (PreparedStatement p = con.prepareStatement(query3)){
+             p.setInt(1, st.getStudentID());
+             p.executeUpdate();
+         }catch (Exception e){
+             System.out.println(e.getMessage());
+         }
+         
         String query = " delete from student where StudentID = ?";
         try ( PreparedStatement p = con.prepareStatement(query)){
             p.setInt(1,st.getStudentID() );
@@ -50,56 +175,11 @@ public class DeleteDB {
         } catch (SQLException e) {
                System.out.println(e.getMessage());
         }
-        
-        
+                
     }
-     
-     public void deleteTopic (int id ){
-         String query = "delete from topic where topicID = ?";
-         try (PreparedStatement p = con.prepareStatement(query)){
-             p.setInt(1, id);
-             p.executeUpdate();
-         }catch (Exception ex){
-            
-         }
-     }
-     public void deleteTest(int id ){
-         String query2 = "delete from createtest where testID = ?";
-         try (PreparedStatement p = con.prepareStatement(query2)){
-             p.setInt(1, id);
-             p.executeUpdate();
-         }catch (Exception ex){
-            
-         }
-         String query1 = "delete from test where testID = ?";
-         try (PreparedStatement p = con.prepareStatement(query1)){
-             p.setInt(1, id);
-             p.executeUpdate();
-         }catch (Exception ex){
-            
-         }         
-         
-     }
-     public void deleteQuestion(int id ){
-         String query2 = "delete from answer where QuestionID = ?";
-         try (PreparedStatement p = con.prepareStatement(query2)){
-             p.setInt(1, id);
-             p.executeUpdate();
-         }catch (Exception ex){
-            
-         }
-         String query1 = "delete from question where QuestionID = ?";
-         try (PreparedStatement p = con.prepareStatement(query1)){
-             p.setInt(1, id);
-             p.executeUpdate();
-         }catch (Exception ex){
-            
-         }         
-         
-     }
     
     public static void main(String[] args) {
         DeleteDB de = new DeleteDB();
-        de.deleteSubject(1);
+      //  de.deleteSubject(1);
     }
 }
