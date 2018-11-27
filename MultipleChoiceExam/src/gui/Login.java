@@ -263,12 +263,13 @@ public class Login extends javax.swing.JFrame {
         else if (cbSV.isSelected()){           
             if (check.CheckStudentLogin(username,password)){
                 setVisible(false);
-                MenuSt menu = new MenuSt();
+                MenuSt menu = new MenuSt(username);
+                menu.setID(tfMS.getText());
                 menu.setVisible(true);
             }else {
                 JOptionPane.showMessageDialog(rootPane,"Mã số hoặc mật khẩu nhập sai, yêu cầu nhập lại !");   
             }
-        }         
+        }        
            
     }//GEN-LAST:event_buttonDangNhapActionPerformed
 

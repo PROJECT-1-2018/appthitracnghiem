@@ -15,9 +15,17 @@ public class Questions {
     private String questionContent;
     private int topicID;
     private int questionLevel;
+     private int index;
 
      public Questions(){
         
+    }
+     public Questions(int index, int questionID, String questionContent,int topicID,int questionLevel){
+        this.questionID = questionID;
+        this.questionContent = questionContent;
+        this.topicID = topicID;
+        this.questionLevel = questionLevel;
+        this.index = index;
     }
 
     public Questions(int questionID, String questionContent,int topicID,int questionLevel){
@@ -25,6 +33,12 @@ public class Questions {
         this.questionContent = questionContent;
         this.topicID = topicID;
         this.questionLevel = questionLevel;
+    }
+    public void setIndex( int index){
+        this.index = index;
+    }
+    public int getIndex (){
+        return index;
     }
 
     public int getQuestionID() {

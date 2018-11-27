@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import object.InforLoginStudent;
+import object.Room;
 import object.Student;
 import object.Topic;
 
@@ -26,7 +29,7 @@ public class DeleteDB {
     public DeleteDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2?useUnicode=true&characterEncoding=UTF-8","root","");  
             st = con.createStatement();
         } catch (Exception exception){
             System.out.println(exception);
@@ -38,6 +41,26 @@ public class DeleteDB {
         String sql = "DELETE FROM subjects WHERE SubjectID = ?";
         try (PreparedStatement p = con.prepareStatement(sql)){
             p.setInt(1,id);
+            p.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }                
+    }
+    public void deleteRoom(int roomId){  // xoa phong thi  
+        /*ArrayList<InforLoginStudent> listStudent = new GetDB().getStudentInRoom(roomId);
+        for(InforLoginStudent s : listStudent){
+            int studentId =  s.getStudentID();
+            String query3 = "delete from result where StudentID = ?";
+            try (PreparedStatement p = con.prepareStatement(query3)){
+                p.setInt(1, studentId);
+                p.executeUpdate();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }*/
+        String sql = "DELETE FROM createsignin WHERE RoomID = ?";
+        try (PreparedStatement p = con.prepareStatement(sql)){
+            p.setInt(1,roomId);
             p.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());

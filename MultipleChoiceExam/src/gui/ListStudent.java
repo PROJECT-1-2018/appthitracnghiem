@@ -16,37 +16,41 @@ import object.StudentResult;
  * @author Giang Le
  */
 public class ListStudent extends javax.swing.JFrame {
-   private ArrayList<StudentResult>  list;
-   DefaultTableModel model;
+   private ArrayList<Student>  list = new GetDB().getInforStudent();
+   DefaultTableModel tableModel;
 
     /**
      * Creates new form ListStudent
      */
     public ListStudent() {
         initComponents();
-        setBounds(50,50,800,450);
+        setBounds(50,50,1000,450);
         setResizable(false);
-        list = new ArrayList();
-        list = new GetDB().getListStudentResult();
-         model = (DefaultTableModel) jTable1.getModel();
-          model.setColumnIdentifiers(new Object[] {
-            "Mã SV", "Họ và tên", "Ngày sinh", "Lớp", "Môn học", "Chủ đề", "Điểm" 
-        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addTable();
+          
+    }
+    private void addTable(){
+        tableModel = (DefaultTableModel)tbList.getModel();
+        tableModel.setColumnIdentifiers(new Object[]{  // ten bang
+            "MSSV", "Họ Tên ","Lớp","Ngày sinh","Chủ đề","Mã đề","Điểm","Ngày Thi"
         });
-          
-          showTable();
-          
-}
-    public void showTable(){
-        for(StudentResult s : list){
-              model.addRow(new Object[]{
-               s.getStudentID(), s.getStudentName(), s.getBirthday(), s.getClass_st(), 
-               s.getSubject(), s.getTopic(), s.getPoint()
-            // phương thức này để hiển thị kết quả
-                });
-            }
-       }
-    
+        
+        for(Student s : list){
+            int topicId = new GetDB().getTopicFrTest(s.getTestId());
+            String topic = new GetDB().findNameTopFrId(topicId);
+            tableModel.addRow(new Object[]{
+                s.getStudentID(), 
+                s.getStudentName(),  
+                s.getClass_st(), 
+                s.getBirthday(),
+                topic,
+                s.getTestId(),
+                s.getPoints(),
+                s.getResultDate()            
+            });
+        }
+    }    
                     
 
     /**
@@ -58,31 +62,14 @@ public class ListStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbList = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã SV", "Họ và tên", "Ngày sinh", "Lớp", "Môn học", "Chủ đề", "Điểm"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("       THỐNG KÊ SINH VIÊN");
 
         jButton1.setText("Thoát");
@@ -92,31 +79,44 @@ public class ListStudent extends javax.swing.JFrame {
             }
         });
 
+        tbList.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tbList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tbList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 347, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)))
-                .addContainerGap())
+                        .addGap(25, 25, 25))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(362, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(337, 337, 337))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(40, 40, 40))
         );
@@ -125,7 +125,7 @@ public class ListStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new MenuGV().setVisible(true);
+        new StudentManagerment().setVisible(true);
         setVisible(false);        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -167,8 +167,8 @@ public class ListStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tbList;
     // End of variables declaration//GEN-END:variables
 
    

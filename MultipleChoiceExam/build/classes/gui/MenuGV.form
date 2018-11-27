@@ -36,8 +36,8 @@
               <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jButton9" max="32767" attributes="0"/>
-                  <Component id="jButton5" pref="143" max="32767" attributes="0"/>
-                  <Component id="jButton4" pref="143" max="32767" attributes="0"/>
+                  <Component id="jButton5" max="32767" attributes="0"/>
+                  <Component id="jButton4" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -45,7 +45,7 @@
                   <Component id="jButton6" max="32767" attributes="0"/>
                   <Component id="jButton1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="257" max="32767" attributes="0"/>
+              <EmptySpace pref="253" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,7 +124,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="T&#x1ea1;o ph&#xf2;ng thi "/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; ph&#xf2;ng thi "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>

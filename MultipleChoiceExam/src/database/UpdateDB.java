@@ -32,7 +32,7 @@ public class UpdateDB {
         Connection con= null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2","root","");         
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2?useUnicode=true&characterEncoding=UTF-8","root","");         
         } catch (SQLException e){
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -123,10 +123,12 @@ public class UpdateDB {
     public void dbResult(Result res){           // cap nhat ketqua
         String sql ="INSERT INTO result VALUES(?,?,?,?)";
         try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,0);
-            p.setDate(2, (Date)res.getResultDate());
+           
+            p.setInt(1,res.getStudentID());
+            p.setString(2,res.getResultDate());
             p.setFloat(3,res.getPoints());
-            p.setInt(4,res.getTestID());                               
+            p.setInt(4,res.getTestID());
+                                         
             p.executeUpdate();            
         } catch (SQLException e) {
                System.out.println(e.getMessage());
@@ -135,8 +137,8 @@ public class UpdateDB {
     public void dbCreateSignIn(InforLoginStudent infor){           // cap nhat ketqua
         String sql ="INSERT INTO createsignin VALUES(?,?,?,?)";
         try ( Connection con = this.connect(); PreparedStatement p = con.prepareStatement(sql)){
-            p.setInt(1,infor.getStudentID());
-            p.setString(2, infor.getUserName());
+            p.setInt(1,infor.getRoomID());
+            p.setInt(2,infor.getStudentID());
             p.setString(3,infor.getUserPw());
             p.setInt(4,infor.getTestID());                               
             p.executeUpdate();            

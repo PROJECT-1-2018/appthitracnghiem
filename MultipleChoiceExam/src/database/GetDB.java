@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import object.Answer;
+import object.InforLoginStudent;
 import object.Questions;
+import object.Room;
 import object.Student;
 import object.Subject;
 import object.StudentResult;
@@ -24,14 +26,15 @@ import object.Topic;
  */
 public class GetDB {
     private Connection con ;
-    private Statement st;
+    private Statement st,st1;
     private ResultSet rs;
     
     public GetDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2?useUnicode=true&characterEncoding=UTF-8","root","");  
             st = con.createStatement();
+            st1 = con.createStatement();
         } catch (Exception exception){
             System.out.println(exception);
         }
@@ -73,6 +76,52 @@ public class GetDB {
         }
         return listTopic;
     }
+    public ArrayList getListRoom(){ // 
+        ArrayList<Room> listRoom = new ArrayList<>();
+        try {
+           String query = "SELECT RoomID FROM createsignin GROUP BY RoomID";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                listRoom.add(new Room(rs.getInt("RoomID")));
+            }
+        } catch (Exception e) {
+        }
+        return listRoom;
+    }
+     public ArrayList getStudentInRoom(int roomId){ // 
+        ArrayList<InforLoginStudent> list= new ArrayList<>();
+        try {
+            String query = "SELECT createsignin.StudentID,student.StudentName,TestID , UserPw FROM createsignin, student WHERE createsignin.StudentID = student.StudentID and RoomID = '"+roomId+"'";
+            rs = st.executeQuery(query);
+            while (rs.next()){              
+                InforLoginStudent infor = new InforLoginStudent() ;             
+                infor.setStudentID(rs.getInt("StudentID"));
+                infor.setTestID(rs.getInt("TestID"));
+                infor.setUserPw(rs.getString("UserPw"));
+                infor.setStudentName(rs.getString("StudentName"));
+                //
+                int testid = infor.getTestID();                
+                ResultSet rs1;
+                try {
+                    String q = "SELECT test.TopicID, TopicName FROM test , topic WHERE test.TopicID = topic.TopicID And TestID = '"+testid+"'";
+                    rs1 = st1.executeQuery(q);
+                    while (rs1.next()){
+                        infor.setTopicId(rs1.getInt("TopicID"));
+                        infor.setTopicName(rs1.getString("TopicName"));                        
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }               
+                //
+                list.add(infor);
+            }
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
+    
     public ArrayList getListTopic () {
         ArrayList <Topic> listTopicName = new ArrayList<Topic> ();
         try {
@@ -98,6 +147,28 @@ public class GetDB {
                  
             }
         } catch (Exception e) {
+        }
+        return listStudents;
+    }
+    public ArrayList getInforStudent(){ // lay du lieu cua subject cho vao mot danh sach arraylist
+        ArrayList<Student> listStudents = new ArrayList<Student>();
+        try {
+           String query = "SELECT student.StudentID,StudentName,Class,Birthday,TestID, Points,ResultDate FROM student, result WHERE student.StudentID = result.StudentID ORDER by ResultDate";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 Student s = new Student(
+                         rs.getInt("StudentID"),
+                         rs.getString("StudentName"),                         
+                         rs.getString("Class"),
+                         rs.getDate("Birthday"),
+                         rs.getInt("TestID"),
+                         rs.getFloat("Points"),
+                         rs.getString("ResultDate")
+                 );
+                 listStudents.add(s);                 
+            }
+        } catch (Exception e) {
+            System.out.println(e.getCause());
         }
         return listStudents;
     }
@@ -317,6 +388,77 @@ public class GetDB {
         return count;
         
     }
+    public int getMaxPointOfTest(int idTest){ 
+        int point =0;
+        try {
+           String query = "select MaxPoint from Test where TestID = ";
+            rs = st.executeQuery(query+idTest);
+            while (rs.next()){                
+                 point = rs.getInt("MaxPoint");
+           
+            }
+        } catch (Exception e) {
+        }
+        return point;
+    }
+    public int getTestTimeOfTest(int idTest){ 
+        int time =0;
+        try {
+           String query = "select TestTime from Test where TestID = ";
+            rs = st.executeQuery(query+idTest);
+            while (rs.next()){                
+                 time = rs.getInt("TestTime");
+           
+            }
+        } catch (Exception e) {
+        }
+        return time;
+    }
+    public ArrayList getListQuestionForTest(int testId){ 
+        int i=0;
+        ArrayList<Questions> listQue = new ArrayList<>();
+        
+        try {
+           String query = "select question.QuestionID,QuestionContent,TopicID,QuestionLevel from createtest,question "
+                        + "where (question.questionid = createtest.questionid) and (TestID = '"+testId+"') ";
+            rs = st.executeQuery(query);
+            while (rs.next()){                              
+                 Questions que = new Questions(++i,rs.getInt("questionID"),rs.getString("questionContent"),
+                                         rs.getInt("topicID"),rs.getInt("questionLevel"));
+                 listQue.add(que);                 
+            }
+        } catch (Exception e) {
+        }
+        return listQue;
+    }
+    public int getTopicFrTest (int idTest){
+        int id = -1;
+        try {
+           String query = "select TopicID from Test where TestID = '"+idTest+"'";
+            rs = st.executeQuery(query);
+            while (rs.next()){                
+                 id =rs.getInt("TopicID");     
+            }
+        } catch (Exception e) {
+        }
+        return id;
+        
+    }
+    public int getTestIdFrStuId (int idStu){
+        int id = -1;
+        try {
+           String query = "select TestID from createsignin where StudentID =";
+            rs = st.executeQuery(query+idStu);
+            while (rs.next()){                
+                 id =rs.getInt("TestID");     
+            }
+        } catch (Exception e) {
+        }
+        return id;
+        
+    }
+    
+    
     public static void main(String[] args) {
         GetDB get = new GetDB();
         ArrayList<Subject> ar = get.getListSubject();

@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import object.Test;
 
 public class SubjectManagement extends javax.swing.JFrame {
     private ArrayList<Subject> listSubjects;
@@ -238,6 +239,7 @@ public class SubjectManagement extends javax.swing.JFrame {
     // them mon hoc
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         Subject subject = new Subject(Integer.parseInt(tfID.getText()),tfName.getText());
+      //  System.out.println(tfName.getText());
         // kiem tra ma mon hoc da ton tai hay chua? neu chua thi up len database 
         CheckDB check = new CheckDB();
         int id = subject.getSubjectID();
@@ -262,13 +264,29 @@ public class SubjectManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_tfIDActionPerformed
     // xoa mon hoc 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        int index = tbList.getSelectedRow();      
-        TableModel model = tbList.getModel();
-        int id = Integer.parseInt(model.getValueAt(index, 0).toString());
-        DeleteDB del = new DeleteDB();
-        del.deleteSubject(id);
-        JOptionPane.showMessageDialog(rootPane," Xóa thành công !");
-        tableModel.removeRow(index);
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+                    int n = JOptionPane.showOptionDialog(rootPane,
+                                    "Chắc chắn muốn xóa ? ",
+                                    "Question",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    options[0]);
+                    if (n == JOptionPane.YES_OPTION) {
+                       //     
+                       int index = tbList.getSelectedRow();      
+                        TableModel model = tbList.getModel();
+                        int id = Integer.parseInt(model.getValueAt(index, 0).toString());
+                        DeleteDB del = new DeleteDB();
+                        del.deleteSubject(id);
+                        JOptionPane.showMessageDialog(rootPane," Xóa thành công !");
+                        tableModel.removeRow(index);
+                       //
+                    } else if (n == JOptionPane.NO_OPTION) {                        
+                       return;
+                    } else {                       
+                    }                                 
         
     }//GEN-LAST:event_btnDelActionPerformed
     // xu li click chuot vao mon hoc 

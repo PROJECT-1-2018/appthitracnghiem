@@ -27,14 +27,15 @@ import object.Topic;
  * @author Nguyen Viet Tien
  */
 public class CreateRoom extends javax.swing.JFrame {
-    private int numStudent;
+    private int numStudent, roomId;
     private ArrayList<Subject> listSubjects = new GetDB().getListSubject();
     private ArrayList<InforLoginStudent> listInfor = new ArrayList<>() ;
     private ArrayList<Test> listTests;
     private int subjectID, topicID;
     DefaultTableModel tableModel;
    
-    public CreateRoom(int numstudent) {
+    public CreateRoom(int roomID, int numstudent) {
+        this.roomId = roomID;
         this.numStudent = numstudent;            
         initComponents();       
         setBounds(50, 50, 800, 450);        
@@ -44,14 +45,14 @@ public class CreateRoom extends javax.swing.JFrame {
     private void addTable(){       
         tableModel = (DefaultTableModel)tbList.getModel();
         tableModel.setColumnIdentifiers(new Object[]{  // ten bang
-            "Số thứ tự", "MSSV","Tên đăng nhập","Mật khẩu","Mã đề"
+            "Số thứ tự", "MSSV","Họ tên","Phòng thi ","Mật khẩu","Mã đề"
         });       
         tableModel.setRowCount(0);
         for (InforLoginStudent infor : listInfor)
         tableModel.addRow(new Object[]{
             tableModel.getRowCount()+1,infor.getStudentID(),
             new GetDB().getNameStudentFromID(infor.getStudentID()),
-            infor.getUserName(),
+            infor.getRoomID(),
             infor.getUserPw(),
             infor.getTestID()                
             });        
@@ -263,14 +264,31 @@ public class CreateRoom extends javax.swing.JFrame {
                        return;
                     } else if (n == JOptionPane.NO_OPTION) {
                         //
-                        new MenuGV().setVisible(true);
+                        new RoomManagerment().setVisible(true);
                         setVisible(false);  
                     } else {
                         //
                     }                 
         } else {
-             new MenuGV().setVisible(true);
+            Object[] options = {"Ở lại trang này ", "Thoát"};
+                    int n = JOptionPane.showOptionDialog(rootPane,
+                                    "Cần lưu trước khi thoát !",
+                                    "Question",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    options[0]);
+                    if (n == JOptionPane.YES_OPTION) {
+                       //       
+                       return;
+                    } else if (n == JOptionPane.NO_OPTION) {
+                        //
+                        new RoomManagerment().setVisible(true);
                         setVisible(false);  
+                    } else {
+                        //
+                    }                        
         }                     
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -292,7 +310,7 @@ public class CreateRoom extends javax.swing.JFrame {
                 {
                     int numStudentTmp  = listInfor.size()+1;
                     int testId = listTests.get(numStudentTmp % listTests.size() ).getTestID(); // testID 
-                    InforLoginStudent infor = new InforLoginStudent(studentID,new RandomAll().createRandom(6),new RandomAll().createRandom(8), testId);             
+                    InforLoginStudent infor = new InforLoginStudent(roomId,studentID,new RandomAll().createRandom(8), testId);             
                     listInfor.add(infor);                
                     addTable();
                     tfID.setText(""+(1+(Integer.parseInt(tfID.getText()))));
@@ -373,6 +391,7 @@ public class CreateRoom extends javax.swing.JFrame {
             for (InforLoginStudent infor : listInfor ){
                 new UpdateDB().dbCreateSignIn(infor);
             }
+            JOptionPane.showMessageDialog(rootPane, "Lưu thành công !");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Nhập chưa đủ số học sinh ");
         }
@@ -408,7 +427,7 @@ public class CreateRoom extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               new CreateRoom(6).setVisible(true);
+             //  new CreateRoom(6).setVisible(true);
             }
         });
     }

@@ -260,17 +260,32 @@ public class TopicManagerment extends javax.swing.JFrame {
     
     
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-                       
-         try{
-             int SelectRow = jTable1.getSelectedRow();             
-             int id = Integer.parseInt(model.getValueAt(SelectRow, 0).toString()) ;           
-             DeleteDB del = new DeleteDB();
-             del.deleteTopic(id);
-             model.removeRow(SelectRow);
-         }catch (Exception ex){
-             JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");
-         }
-         JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+                    int n = JOptionPane.showOptionDialog(rootPane,
+                                    "Chắc chắn muốn xóa ? ",
+                                    "Question",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    options[0]);
+                    if (n == JOptionPane.YES_OPTION) {
+                       //     
+                       try{
+                            int SelectRow = jTable1.getSelectedRow();             
+                            int id = Integer.parseInt(model.getValueAt(SelectRow, 0).toString()) ;           
+                            DeleteDB del = new DeleteDB();
+                            del.deleteTopic(id);
+                            model.removeRow(SelectRow);
+                        }catch (Exception ex){
+                            JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+                       //
+                    } else if (n == JOptionPane.NO_OPTION) {                        
+                       return;
+                    } else {                       
+                    }                                      
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void cbSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubjectActionPerformed

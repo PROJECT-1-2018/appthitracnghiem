@@ -12,10 +12,24 @@ import java.sql.Date;
  * @author Nguyen Viet Tien
  */
 public class Student {
-    private String studentName;
     private int studentID;
+    private String studentName;  
     private String class_st;
     private Date birthday;
+    
+    private int testId;
+
+    public Student(int studentID, String studentName, String class_st, Date birthday, int testId, float points, String resultDate) {
+        this.studentID = studentID;
+        this.studentName = studentName;
+        this.class_st = class_st;
+        this.birthday = birthday;
+        this.testId = testId;
+        this.points = points;
+        this.resultDate = resultDate;
+    }
+    private float points;    
+    private String resultDate;
     
     public Student(){}
     public Student (String studentName, int studentID, String class_st, Date birthday) {
@@ -23,9 +37,20 @@ public class Student {
     this.studentID = studentID;
     this.class_st = class_st;
     this.birthday = birthday;
-    
+    }
 
-}
+    public float getPoints() {
+        return points;
+    }
+
+    public int getTestId() {
+        return testId;
+    }
+
+    public String getResultDate() {
+        return resultDate;
+    }
+    
 
     public String getStudentName() {
         return studentName;

@@ -442,16 +442,31 @@ public class TestManagerment extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNumQuestionActionPerformed
 int index ; //chỉ số hàng được chọn trong bảng
     private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
-        // TODO add your handling code here:
-        Test t = new Test();
-        TableModel mdl = jTable1.getModel();
-        String ID = model.getValueAt(index, 0).toString();
-        DeleteDB del = new DeleteDB();
-        del.deleteTest(Integer.parseInt(ID));
-        listTest.remove(t);
-        model = (DefaultTableModel) jTable1.getModel();
-        model.removeRow(index);
-        JOptionPane.showMessageDialog(rootPane,"Xoá thành công");
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+                    int n = JOptionPane.showOptionDialog(rootPane,
+                                    "Chắc chắn muốn xóa ? ",
+                                    "Question",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    options[0]);
+                    if (n == JOptionPane.YES_OPTION) {
+                       //     
+                       Test t = new Test();
+                        TableModel mdl = jTable1.getModel();
+                        String ID = model.getValueAt(index, 0).toString();
+                        DeleteDB del = new DeleteDB();
+                        del.deleteTest(Integer.parseInt(ID));
+                        listTest.remove(t);
+                        model = (DefaultTableModel) jTable1.getModel();
+                        model.removeRow(index);
+                        JOptionPane.showMessageDialog(rootPane,"Xoá thành công");
+                       //
+                    } else if (n == JOptionPane.NO_OPTION) {                        
+                       return;
+                    } else {                       
+                    }                           
     }//GEN-LAST:event_delButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

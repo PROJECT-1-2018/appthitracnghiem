@@ -5,22 +5,33 @@
  */
 package object;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
 public class Result {
     private int resultID;
-    private Date resultDate;
+    private String resultDate;
     private float points;
     private int testID;
+    private int studentID;
     
-    public Result (int resultID, Date resultDate, float points, int testID){
-        this.resultID = resultID;
+    public Result (float point,int testID, String resultDate, int studentID){
+        this.studentID = studentID;
         this.resultDate = resultDate;
-        this.points = points;
+        this.points = point;
         this.testID = testID;
         
     }
+    
+     public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+    
 
     public int getResultID() {
         return resultID;
@@ -30,11 +41,11 @@ public class Result {
         this.resultID = resultID;
     }
 
-    public Date getResultDate() {
+    public String getResultDate() {
         return resultDate;
     }
 
-    public void setResultDate(Date resultDate) {
+    public void setResultDate(String resultDate) {
         this.resultDate = resultDate;
     }
 

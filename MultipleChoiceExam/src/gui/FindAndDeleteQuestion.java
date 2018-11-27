@@ -88,6 +88,9 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        lble1 = new javax.swing.JLabel();
+        lble2 = new javax.swing.JLabel();
+        lble3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tìm kiến & Xóa Câu hỏi ");
@@ -166,6 +169,15 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
+        lble1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lble1.setText("jLabel4");
+
+        lble2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lble2.setText("jLabel4");
+
+        lble3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lble3.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,16 +188,6 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lbID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +201,25 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lble1))
+                        .addGap(85, 85, 85)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lble2)
+                                .addGap(148, 148, 148)
+                                .addComponent(lble3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -212,6 +232,11 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
                     .addComponent(cbTopic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lble1)
+                    .addComponent(lble2)
+                    .addComponent(lble3))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,7 +247,7 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbAn2)
@@ -232,12 +257,23 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbAn3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbAn4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void printNumberOfLevel(ArrayList<Questions> list){
+        int le1 = 0, le2 = 0, le3 = 0;
+        for(Questions s : list){
+            if (s.getQuestionLevel()==1) le1++;
+            else if (s.getQuestionLevel()==2) le2++;
+            else le3++;           
+        }
+        lble1.setText("Câu dễ: "+le1);
+        lble2.setText("Câu trung bình : "+le2);
+        lble3.setText("Câu khó : "+le3);
+        
+    }
     private void cbTopicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTopicActionPerformed
         Object selected = cbTopic.getSelectedItem();
             if (selected != null) // kiem tra neu co chu de thi moi lay ve duoc
@@ -252,6 +288,7 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
                 topicID  =id;
                 ArrayList<Questions> listQuestions  =new GetDB().getListQuestionFromTopic(id);
                 addTable(listQuestions);
+                printNumberOfLevel(listQuestions);
             }        
     }//GEN-LAST:event_cbTopicActionPerformed
 
@@ -291,23 +328,43 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int index = tbList.getSelectedRow();
-        TableModel model = tbList.getModel();
-        int id = Integer.parseInt(model.getValueAt(index, 0).toString());  
-        try {
-            new DeleteDB().deleteQuestion(id);
-            JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");  
-            addCbSuject(); 
-            lbID.setText("Mã số: "+id);
-            jTextArea1.setText("Nội dung : " );
-            jTextArea1.setWrapStyleWord(true);
-            lbAn1.setText("Đáp án 1: ");
-            lbAn2.setText("Đáp án 2: ");
-            lbAn3.setText("Đáp án 3: ");
-            lbAn4.setText("Đáp án 4: ");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");
-        }
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+                    int n = JOptionPane.showOptionDialog(rootPane,
+                                    "Chắc chắn muốn xóa ? ",
+                                    "Question",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            //
+            int index = tbList.getSelectedRow();
+            TableModel model = tbList.getModel();
+            int id = Integer.parseInt(model.getValueAt(index, 0).toString());  
+            try {
+                new DeleteDB().deleteQuestion(id);
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");  
+                addCbSuject(); 
+                lbID.setText("Mã số: "+id);
+                jTextArea1.setText("Nội dung : " );
+                jTextArea1.setWrapStyleWord(true);
+                lbAn1.setText("Đáp án 1: ");
+                lbAn2.setText("Đáp án 2: ");
+                lbAn3.setText("Đáp án 3: ");
+                lbAn4.setText("Đáp án 4: ");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");
+            }
+            //
+        } else if (n == JOptionPane.NO_OPTION) {                        
+            return;
+        } else {                       
+        }        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -361,6 +418,9 @@ public class FindAndDeleteQuestion extends javax.swing.JFrame {
     private javax.swing.JLabel lbAn3;
     private javax.swing.JLabel lbAn4;
     private javax.swing.JLabel lbID;
+    private javax.swing.JLabel lble1;
+    private javax.swing.JLabel lble2;
+    private javax.swing.JLabel lble3;
     private javax.swing.JTable tbList;
     // End of variables declaration//GEN-END:variables
 }

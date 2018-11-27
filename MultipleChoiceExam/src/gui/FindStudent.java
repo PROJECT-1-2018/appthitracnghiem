@@ -26,7 +26,8 @@ public class FindStudent extends javax.swing.JFrame {
         initComponents();    
         setBounds(50,50,800,450);
         setResizable(false);
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);       
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -228,7 +229,7 @@ public class FindStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_findButActionPerformed
 
     private void exitButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButActionPerformed
-       new MenuGV().setVisible(true);
+   //    new St.setVisible(true);
         setVisible(false);      
     }//GEN-LAST:event_exitButActionPerformed
     

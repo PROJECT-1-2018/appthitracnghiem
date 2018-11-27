@@ -10,14 +10,19 @@ import gui.TakeExams;
  * @author Nguyen Viet Tien
  */
 public class MenuSt extends javax.swing.JFrame {
-
+private static String ID;
+public void setID (String id){
+    this.ID = id;
+    
+}
     /**
      * Creates new form MenuSt
      */
-    public MenuSt() {
+    public MenuSt( String ID) {
         initComponents();
          setBounds(50,50,800,450);
         setResizable(false);
+        this.ID = ID;
     }
 
     /**
@@ -90,7 +95,9 @@ public class MenuSt extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new TakeExams().setVisible(true);
+        TakeExams te = new TakeExams(ID);
+        te.setVisible(true);
+        
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -124,7 +131,7 @@ public class MenuSt extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuSt().setVisible(true);
+                new MenuSt(ID).setVisible(true);
             }
         });
     }

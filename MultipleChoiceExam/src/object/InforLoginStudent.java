@@ -13,15 +13,60 @@ import java.util.Random;
  * @author DuongSon
  */
 public class InforLoginStudent {
-    private int studentID, testID;
-    private String userName, userPw;
+    private int studentID, testID, roomID,topicId;
 
-    public InforLoginStudent(int studentID, String userName, String userPw,int testID) {
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public InforLoginStudent() {
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+    private String userPw, studentName, topicName;
+
+    public InforLoginStudent( int roomID,int studentID,String userPw,int testID) {
         this.studentID = studentID;
         this.testID = testID;
-        this.userName = userName;
+        this.roomID = roomID;
         this.userPw = userPw;
     }
+
+    public int getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(int topicId) {
+        this.topicId = topicId;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+    
+    
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public InforLoginStudent(int studentID, int testID, String userPw, String studentName) {
+        this.studentID = studentID;
+        this.testID = testID;
+        this.userPw = userPw;
+        this.studentName = studentName;
+    }
+
+    
 
     public int getStudentID() {
         return studentID;
@@ -39,13 +84,7 @@ public class InforLoginStudent {
         this.testID = testID;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+   
 
     public String getUserPw() {
         return userPw;

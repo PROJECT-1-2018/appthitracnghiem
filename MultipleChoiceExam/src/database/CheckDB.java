@@ -22,15 +22,15 @@ public class CheckDB {
     public CheckDB(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/dbexam2?useUnicode=true&characterEncoding=UTF-8","root","");  
             st = con.createStatement();
         } catch (Exception exception){
             System.out.println(exception);
         }
     }
-    public boolean CheckStudentLogin(String username,String password){       
+    public boolean CheckStudentLogin(String id,String password){       
         try {
-            String sql = "select * from createsignin where UserName = '" +username+"' and UserPw = '"+password+"'";
+            String sql = "select * from createsignin where StudentID = '" +id+"' and UserPw = '"+password+"'";
             rs = st.executeQuery(sql);
             if (rs.next()) return true;            
         } catch (Exception e) {
